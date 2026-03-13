@@ -609,7 +609,7 @@ public:
 		{
 		public:
 			Filter( int id,const QByteArray& data ) :
-				m_id( id ),m_text( "[media-downloader][std error] " + data )
+				m_id( id ),m_text( "[TDownRemaster][std error] " + data )
 			{
 			}
 			int id() const
@@ -746,11 +746,11 @@ public:
 	{
 		m_logger.add( e,m_id ) ;
 
-		if( e.startsWith( "[media-downloader]" ) ){
+		if( e.startsWith( "[TDownRemaster]" ) ){
 
 			m_localLogger.add( e,m_id ) ;
 		}else{
-			m_localLogger.add( "[media-downloader] " + e,m_id ) ;
+			m_localLogger.add( "[TDownRemaster] " + e,m_id ) ;
 		}
 
 		this->update() ;
@@ -831,11 +831,11 @@ public:
 	{
 		m_logger.add( s,m_id ) ;
 
-		if( s.startsWith( "[media-downloader]" ) ){
+		if( s.startsWith( "[TDownRemaster]" ) ){
 
 			m_localLogger.add( s,m_id ) ;
 		}else{
-			m_localLogger.add( "[media-downloader] " + s,m_id ) ;
+			m_localLogger.add( "[TDownRemaster] " + s,m_id ) ;
 		}
 
 		this->update() ;

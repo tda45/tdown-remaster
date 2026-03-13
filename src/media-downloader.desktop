@@ -1,17 +1,17 @@
 [Desktop Entry]
 Categories=AudioVideo;Recorder;
-Name=Media Downloader
-Name[en_US]=Media Downloader
-Name[tr_TR]=Medya İndirici
-Name[ko_KR]=미디어 다운로더
-Name[ko]=미디어 다운로더
-Name[es]=Descargador de medios
+Name=TDown Remaster
+Name[en_US]=TDown Remaster
+Name[tr_TR]=TDown Remaster
+Name[ko_KR]=TDown Remaster
+Name[ko]=TDown Remaster
+Name[es]=TDown Remaster
 Comment=Downloads Online Media Files
 Comment[en_US]=Downloads Online Media Files
 Comment[ko_KR]=온라인 미디어 파일 다운로드
 Comment[ko]=온라인 미디어 파일 다운로드
 Comment[es]=Herramienta para descargar archivos de medios
-GenericName=Media downloader tool
+GenericName=TDown Remaster - Media downloader tool
 GenericName[es]=Gestor de descarga de medios
 GenericName[tr_TR]=Medya indirme yöneticisi
 Exec=media-downloader

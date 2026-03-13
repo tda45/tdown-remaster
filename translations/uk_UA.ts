@@ -611,8 +611,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Помилка, не вдалося знайти виконуваний файл для серверної частини &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Для плагіна &quot;%1&quot; потрібно принаймні &quot;%2&quot; версія Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Для плагіна &quot;%1&quot; потрібно принаймні &quot;%2&quot; версія TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

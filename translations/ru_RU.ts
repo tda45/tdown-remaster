@@ -603,8 +603,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Ошибка, не удалось найти исполняемый файл для серверной части &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Для плагина &quot;%1&quot; требуется по крайней мере &quot;%2&quot; версия Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Для плагина &quot;%1&quot; требуется по крайней мере &quot;%2&quot; версия TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

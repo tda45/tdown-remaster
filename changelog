@@ -300,7 +300,7 @@ Version 1.2.0(April 1st, 2021)
      Version 5.0.0(August 16th, 2024)
          [Linux]
          - Add support for flatpak and a flatpak package is hosted at
-           flathub(https://flathub.org/apps/io.github.mhogomchungu.media-downloader).
+           flathub(https://flathub.org/apps/io.github.tda45.tdown-remaster).
          [All]
          - Various bug fixes and improvements.
 

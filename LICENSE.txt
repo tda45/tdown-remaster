@@ -1,4 +1,7 @@
 
+NOT:YAPIMCI TDA_45 VE Francis Banyikwa'a Böyle Bir Müq Program Yazdığı İçin Çok Teşekkürler
+Ve Şimdi Lisansı...
+
 copyright (c) 2021-2025
 name : Francis Banyikwa
 email: mhogomchungu@gmail.com

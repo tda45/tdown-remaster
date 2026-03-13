@@ -35,7 +35,7 @@ MainWindow::MainWindow( QApplication& app,
 			const utility::cliArguments& args ) :
 	m_trayIcon( s.getIcon( "media-downloader" ) ),
 	m_qApp( app ),
-	m_appName( "Media Downloader" ),
+	m_appName( "TDown Remaster" ),
 	m_ui( this ),
 	m_logger( m_ui.plainTextEditLogger(),this,s ),
 	m_engines( m_logger,paths,s,utility::sequentialID() ),
@@ -54,7 +54,7 @@ MainWindow::MainWindow( QApplication& app,
 
 	m_settings.setMainWindowDimensions( this->window() ) ;
 
-	this->window()->setWindowIcon( m_trayIcon.icon() ) ;
+	this->window()->setWindowIcon( QIcon( ":/tdown-remaster.png" ) ) ;
 
 	m_trayIcon.setContextMenu( [ this,&t ](){
 

@@ -603,8 +603,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>خطأ، تعذّر العثور على الملف القابل للتنفيذ لل الواجهة الخلفية &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>الأداة &quot;%1&quot; تتطلب على الأقل الإصدار &quot;%2&quot; من برنامج تنزيل الوسائط</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>الأداة &quot;%1&quot; تتطلب على الأقل الإصدار &quot;%2&quot; من TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

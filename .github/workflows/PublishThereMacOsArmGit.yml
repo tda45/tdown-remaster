@@ -15,6 +15,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.MD_GIT_PUBLISH }}
-          repository: mhogomchungu/media-downloader-git
+          repository: tda45/tdown-remaster-git
           event-type: PublishMacArmGit
 

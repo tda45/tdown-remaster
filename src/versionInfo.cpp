@@ -300,10 +300,13 @@ void versionInfo::checkMediaDownloaderUpdate( const std::vector< engines::engine
 
 				auto m = this->createPrintVinfo( engines,true ) ;
 				this->checkMediaDownloaderUpdate( m.move(),id,nreply.data(),engines,true ) ;
+			}else if( reply.errorString().contains( "404" ) ){
+				// Bypass 404 errors to allow app to start with local engines
+				this->check( this->createPrintVinfo( engines,true ) ) ;
 			}else{
 				this->check( this->createPrintVinfo( engines,false ) ) ;
 			}
-		} ) ;
+		},m_network.defaultUserAgent() ) ;
 	}else{
 		this->check( this->createPrintVinfo( engines,true ) ) ;
 	}
@@ -369,6 +372,7 @@ void versionInfo::printVersion( versionInfo::printVinfo vInfo ) const
 
 	auto id = utility::sequentialID() ;
 
+	this->log( QByteArray("Starting version check"),id ) ;
 	this->log( QObject::tr( "Checking installed version of %1" ).arg( engine.name() ),id ) ;
 
 	if( engine.name().contains( "yt-dlp" ) && engine.name() != "yt-dlp" ){
@@ -385,7 +389,8 @@ void versionInfo::printVersion( versionInfo::printVinfo vInfo ) const
 
 				this->log( m.arg( version.toString() ),id ) ;
 
-				return this->next( vInfo.move() ) ;
+				this->log( QByteArray("Version check completed"),id ) ;
+			return this->next( vInfo.move() ) ;
 			}
 		}
 	}
@@ -402,101 +407,120 @@ void versionInfo::printVersion( versionInfo::printVinfo vInfo ) const
 		this->log( m.arg( engine.name() ),id ) ;
 		this->log( bar,id ) ;
 
-		return this->next( vInfo.move() ) ;
+		this->log( QByteArray("Version check completed"),id ) ;
+			return this->next( vInfo.move() ) ;
 	}
 
-	engines::engine::exeArgs::cmd cmd( engine.exePath(),{ versionArgs } ) ;
+	try {
+		engines::engine::exeArgs::cmd cmd( engine.exePath(),{ versionArgs } ) ;
 
-	QString exe = "\"" + cmd.exe() + "\"" ;
+		QString exe = "\"" + cmd.exe() + "\"" ;
 
-	for( const auto& it : cmd.args() ){
+		for( const auto& it : cmd.args() ){
 
-		exe += " \"" + it + "\"" ;
+			exe += " \"" + it + "\"" ;
+		}
+
+		if( m_ctx.debug() ){
+
+			m_ctx.logger().add( "cmd: " + exe,id ) ;
+		}
+
+		// Check if executable path is valid
+		if( cmd.exe().isEmpty() ){
+			this->log( "Error: Empty executable path for engine: " + engine.name(),id ) ;
+			engine.setBroken() ;
+			this->log( QByteArray("Version check completed"),id ) ;
+			return this->next( vInfo.move() ) ;
+		}
+
+		auto mm = QProcess::ProcessChannelMode::MergedChannels ;
+
+		utility::setPermissions( cmd.exe() ) ;
+
+		versionInfo::pVInfo v{ vInfo.move(),id,exe } ;
+
+		utils::qprocess::run( cmd.exe(),cmd.args(),mm,v.move(),this,&versionInfo::printVersionP ) ;
+	} catch( const std::exception& e ) {
+		this->log( "Exception during version check for " + engine.name() + ": " + e.what(),id ) ;
+		engine.setBroken() ;
+		this->log( QByteArray("Version check completed"),id ) ;
+			return this->next( vInfo.move() ) ;
+	} catch( ... ) {
+		this->log( "Unknown exception during version check for " + engine.name(),id ) ;
+		engine.setBroken() ;
+		this->log( QByteArray("Version check completed"),id ) ;
+			return this->next( vInfo.move() ) ;
 	}
-
-	if( m_ctx.debug() ){
-
-		m_ctx.logger().add( "cmd: " + exe,id ) ;
-	}
-
-	auto mm = QProcess::ProcessChannelMode::MergedChannels ;
-
-	utility::setPermissions( cmd.exe() ) ;
-
-	versionInfo::pVInfo v{ vInfo.move(),id,exe } ;
-
-	utils::qprocess::run( cmd.exe(),cmd.args(),mm,v.move(),this,&versionInfo::printVersionP ) ;
 }
 
 void versionInfo::printVersionP( versionInfo::pVInfo pvInfo,const utils::qprocess::outPut& r ) const
 {
 	const auto& engine = pvInfo.engine() ;
 
-	auto versionString = engine.parseVersionInfo( r ) ;
+	try {
+		auto versionString = engine.parseVersionInfo( r ) ;
 
-	if( !versionString.isEmpty() ){
+		if( !versionString.isEmpty() ){
 
-		auto m = engine.setVersionString( versionString ) ;
+			auto m = QObject::tr( "Found version: %1" ).arg( versionString ) ;
 
-		this->log( QObject::tr( "Found version: %1" ).arg( m ),pvInfo.id() ) ;
+			this->log( m,pvInfo.id() ) ;
 
-		const auto& url = engine.downloadUrl() ;
-
-		const auto& vInfo = pvInfo.printVinfo() ;
-
-		auto a = m_showLocalAndLatestVersions ;
-		auto b = m_showLocalVersionsAndUpdateIfAvailable ;
-
-		if( !url.isEmpty() && vInfo.networkAvailable() && ( a || b ) ){
-
-			m_network.get( url,pvInfo.move(),this,&versionInfo::printVersionN ) ;
+			this->next( pvInfo.movePrintVinfo() ) ;
 		}else{
+			auto bar = utility::barLine() ;
+
+			auto id = pvInfo.id() ;
+
+			this->log( bar,id ) ;
+
+			auto m = QObject::tr( "Failed to find version information, make sure \"%1\" is installed and works properly" ) ;
+
+			this->log( m.arg( engine.name() ),pvInfo.id() ) ;
+
+			engine.setBroken() ;
+
+			this->log( "Cmd: " + pvInfo.cmd(),id ) ;
+
+			this->log( "Exit Code: " + QString::number( r.exitCode ),id ) ;
+
+			auto mm = r.exitStatus ;
+
+			if( mm == utils::qprocess::outPut::ExitStatus::NormalExit ){
+
+				this->log( "Exit Status: Normal Exit",id ) ;
+
+			}else if( mm == utils::qprocess::outPut::ExitStatus::Crashed ){
+
+				this->log( "Exit Status: Crashed",id ) ;
+
+			}else{
+				this->log( "Exit Status: Failed To Start",id ) ;
+			}
+
+			if( !r.stdOut.isEmpty() ){
+
+				this->log( "Std Out: " + r.stdOut,id ) ;
+			}
+
+			if( !r.stdError.isEmpty() ){
+
+				this->log( "Std Error: " + r.stdError,id ) ;
+			}
+
+			this->log( bar,id ) ;
+
+			this->log( QByteArray("Version check completed"),id ) ;
 			this->next( pvInfo.movePrintVinfo() ) ;
 		}
-	}else{
-		auto bar = utility::barLine() ;
-
-		auto id = pvInfo.id() ;
-
-		this->log( bar,id ) ;
-
-		auto m = QObject::tr( "Failed to find version information, make sure \"%1\" is installed and works properly" ) ;
-
-		this->log( m.arg( engine.name() ),pvInfo.id() ) ;
-
-		engine.setBroken() ;
-
-		this->log( "Cmd: " + pvInfo.cmd(),id ) ;
-
-		this->log( "Exit Code: " + QString::number( r.exitCode ),id ) ;
-
-		auto mm = r.exitStatus ;
-
-		if( mm == utils::qprocess::outPut::ExitStatus::NormalExit ){
-
-			this->log( "Exit Status: Normal Exit",id ) ;
-
-		}else if( mm == utils::qprocess::outPut::ExitStatus::Crashed ){
-
-			this->log( "Exit Status: Crashed",id ) ;
-		}else{
-			this->log( "Exit Status: Failed To Start",id ) ;
-		}
-
-		if( !r.stdOut.isEmpty() ){
-
-			this->log( "Std Out: " + r.stdOut,id ) ;
-		}
-
-		if( !r.stdError.isEmpty() ){
-
-			this->log( "Std Error: " + r.stdError,id ) ;
-		}
-
-		this->log( bar,id ) ;
-
+	} catch( const std::exception& e ) {
+		this->log( "Exception parsing version for " + engine.name() + ": " + e.what(),pvInfo.id() ) ;
 		this->next( pvInfo.movePrintVinfo() ) ;
-	}	
+	} catch( ... ) {
+		this->log( "Unknown exception parsing version for " + engine.name(),pvInfo.id() ) ;
+		this->next( pvInfo.movePrintVinfo() ) ;
+	}
 }
 
 void versionInfo::printVersionN( versionInfo::pVInfo pvInfo,const utils::network::reply& reply ) const
@@ -568,15 +592,15 @@ void versionInfo::updateVersion( versionInfo::pVInfo& pvInfo,
 			auto foundVersion = d.takeLast() ;
 			auto engineName = d.takeLast() ;
 
-			auto bar = "[media-downloader] " + utility::barLine() ;
+			auto bar = "[TDownRemaster] " + utility::barLine() ;
 
 			s.add( id,bar ) ;
 			s.add( id,engineName ) ;
 			s.add( id,foundVersion ) ;
-			s.add( id,"[media-downloader] " + mm.toUtf8() ) ;
+			s.add( id,"[TDownRemaster] " + mm.toUtf8() ) ;
 			s.add( id,bar ) ;
 		}else{
-			s.add( id,"[media-downloader] " + mm.toUtf8() ) ;
+			s.add( id,"[TDownRemaster] " + mm.toUtf8() ) ;
 		}
 
 	},pvInfo.id() ) ;

@@ -1775,7 +1775,7 @@ void playlistdownloader::stdOut::operator()( Logger::Data& data )
 
 			m_parent.m_table.setUiText( QObject::tr( "Download Failed, Network Issue" ),0 ) ;
 
-		}else if( !m.startsWith( "[media-downloader]" ) ){
+		}else if( !m.startsWith( "[TDownRemaster]" ) ){
 
 			m_parent.m_banner.updateProgress( "" ) ;
 

@@ -1,0 +1,250 @@
+name: Build TDownRemaster Linux Packages
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro: [ubuntu-20.04, ubuntu-22.04, fedora-38]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies (Ubuntu)
+      if: matrix.distro == 'ubuntu-20.04' || matrix.distro == 'ubuntu-22.04'
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential cmake git
+        sudo apt install -y qt6-base-dev qt6-svg-dev qt6-tools-dev \
+          qml6-module-qtquick-controls2 qml6-module-qtwebsockets \
+          qml6-module-qtwebchannel qt6-tools-dev-tools
+        sudo apt install -y appimagetool dpkg-dev rpm
+
+    - name: Install dependencies (Fedora)
+      if: matrix.distro == 'fedora-38'
+      run: |
+        sudo dnf update -y
+        sudo dnf groupinstall -y "Development Tools"
+        sudo dnf install -y cmake git
+        sudo dnf install -y qt6-qtbase-devel qt6-qtsvg-devel qt6-qttools-devel
+        sudo dnf install -y appimage-tools rpmdevtools
+
+    - name: Configure CMake
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+
+    - name: Build
+      run: |
+        cmake --build build --config Release
+
+    - name: Create AppDir
+      run: |
+        mkdir -p AppDir/usr/bin
+        mkdir -p AppDir/usr/lib
+        mkdir -p AppDir/usr/share/applications
+        mkdir -p AppDir/usr/share/icons/hicolor/256x256/apps
+        mkdir -p AppDir/usr/share/metainfo
+
+    - name: Copy application files
+      run: |
+        cp build/TDownRemaster AppDir/usr/bin/
+        cp build/*.so* AppDir/usr/lib/ 2>/dev/null || true
+
+    - name: Copy Qt libraries
+      run: |
+        if [ -d "/usr/lib/x86_64-linux-gnu" ]; then
+          cp /usr/lib/x86_64-linux-gnu/libQt6*.so* AppDir/usr/lib/ 2>/dev/null || true
+        fi
+
+    - name: Copy Qt plugins
+      run: |
+        mkdir -p AppDir/usr/plugins/platforms
+        mkdir -p AppDir/usr/plugins/imageformats
+        mkdir -p AppDir/usr/plugins/iconengines
+        mkdir -p AppDir/usr/plugins/styles
+        
+        if [ -d "/usr/lib/x86_64-linux-gnu/qt6/plugins" ]; then
+          cp /usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/libqxcb.so AppDir/usr/plugins/platforms/ 2>/dev/null || true
+          cp /usr/lib/x86_64-linux-gnu/qt6/plugins/imageformats/*.so AppDir/usr/plugins/imageformats/ 2>/dev/null || true
+          cp /usr/lib/x86_64-linux-gnu/qt6/plugins/iconengines/*.so AppDir/usr/plugins/iconengines/ 2>/dev/null || true
+        fi
+
+    - name: Create desktop file
+      run: |
+        cat > AppDir/usr/share/applications/TDownRemaster.desktop << 'EOF'
+        [Desktop Entry]
+        Name=TDownRemaster
+        Comment=Media Downloader
+        Comment[tr]=Medya İndirici
+        Exec=TDownRemaster
+        Icon=TDownRemaster
+        Terminal=false
+        Type=Application
+        Categories=AudioVideo;Audio;Video;
+        MimeType=application/x-mpegURL;application/vnd.apple.mpegurl;audio/x-mpegurl;video/x-mpegURL;
+        EOF
+
+    - name: Create AppStream metadata
+      run: |
+        cat > AppDir/usr/share/metainfo/TDownRemaster.metainfo.xml << 'EOF'
+        <?xml version="1.0" encoding="UTF-8"?>
+        <component type="desktop-application">
+          <id>TDownRemaster</id>
+          <metadata_license>CC0-1.0</metadata_license>
+          <project_license>GPL-2.0+</project_license>
+          <name>TDownRemaster</name>
+          <summary>Media Downloader</summary>
+          <summary xml:lang="tr">Medya İndirici</summary>
+          <description>
+            <p>TDownRemaster is a powerful media downloader that supports multiple platforms and formats.</p>
+            <p xml:lang="tr">TDownRemaster, birden çok platformu ve formatı destekleyen güçlü bir medya indiricidir.</p>
+          </description>
+          <launchable type="desktop-id">TDownRemaster.desktop</launchable>
+          <provides>
+            <binary>TDownRemaster</binary>
+          </provides>
+          <url type="homepage">https://github.com/tda45/tdown-remaster</url>
+          <url type="bugtracker">https://github.com/tda45/tdown-remaster/issues</url>
+          <url type="help">https://github.com/tda45/tdown-remaster/wiki</url>
+          <releases>
+            <release version="1.0.0" date="2024-03-14"/>
+          </releases>
+        </component>
+        EOF
+
+    - name: Create AppRun script
+      run: |
+        cat > AppDir/AppRun << 'EOF'
+        #!/bin/bash
+        HERE="$(dirname "$(readlink -f "$0)")"
+        export LD_LIBRARY_PATH="${HERE}/usr/lib:${LD_LIBRARY_PATH}"
+        export QT_PLUGIN_PATH="${HERE}/usr/plugins"
+        export QT_QPA_PLATFORM_PLUGIN_PATH="${HERE}/usr/plugins/platforms"
+        exec "${HERE}/usr/bin/TDownRemaster" "$@"
+        EOF
+        chmod +x AppDir/AppRun
+
+    - name: Create AppImage
+      run: |
+        wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+        chmod +x appimagetool-x86_64.AppImage
+        ./appimagetool-x86_64.AppImage AppDir TDownRemaster-1.0.0-x86_64.AppImage
+
+    - name: Create DEB package
+      if: matrix.distro == 'ubuntu-20.04' || matrix.distro == 'ubuntu-22.04'
+      run: |
+        mkdir -p deb-package/DEBIAN
+        cat > deb-package/DEBIAN/control << 'EOF'
+        Package: tdownremaster
+        Version: 1.0.0
+        Section: sound
+        Priority: optional
+        Architecture: amd64
+        Depends: libqt6core6, libqt6gui6, libqt6widgets6, libqt6network6, libqt6svg6
+        Maintainer: TDownRemaster Team <support@tdownremaster.com>
+        Description: Media Downloader
+         TDownRemaster is a powerful media downloader that supports multiple platforms
+         and formats including YouTube, Vimeo, and many others.
+         .
+         This package includes the TDownRemaster GUI application with all necessary
+         dependencies for media downloading and conversion.
+        EOF
+
+        mkdir -p deb-package/usr/bin
+        mkdir -p deb-package/usr/lib
+        mkdir -p deb-package/usr/share/applications
+        mkdir -p deb-package/usr/share/icons/hicolor/256x256/apps
+        mkdir -p deb-package/usr/share/metainfo
+
+        cp AppDir/usr/bin/TDownRemaster deb-package/usr/bin/
+        cp -r AppDir/usr/lib/* deb-package/usr/lib/ 2>/dev/null || true
+        cp AppDir/usr/share/applications/*.desktop deb-package/usr/share/applications/
+        cp -r AppDir/usr/share/icons/* deb-package/usr/share/icons/ 2>/dev/null || true
+        cp AppDir/usr/share/metainfo/*.xml deb-package/usr/share/metainfo/
+
+        dpkg-deb --build deb-package TDownRemaster_1.0.0_amd64.deb
+
+    - name: Create RPM package
+      if: matrix.distro == 'fedora-38'
+      run: |
+        mkdir -p ~/rpmbuild/SPECS
+        mkdir -p ~/rpmbuild/SOURCES
+        mkdir -p ~/rpmbuild/BUILD
+        
+        cat > ~/rpmbuild/SPECS/TDownRemaster.spec << 'EOF'
+        Name:           TDownRemaster
+        Version:        1.0.0
+        Release:        1%{?dist}
+        Summary:        Media Downloader
+        License:        GPL-2.0+
+        URL:            https://github.com/tda45/tdown-remaster
+        Source0:        %{name}-%{version}.tar.gz
+
+        BuildRequires:  qt6-qtbase-devel
+        BuildRequires:  qt6-qtsvg-devel
+        BuildRequires:  gcc
+        BuildRequires:  cmake
+
+        Requires:       qt6-qtbase
+        Requires:       qt6-qtsvg
+
+        %description
+        TDownRemaster is a powerful media downloader that supports multiple platforms
+        and formats including YouTube, Vimeo, and many others.
+
+        %prep
+        %autosetup
+
+        %build
+        %cmake
+        %cmake_build
+
+        %install
+        %cmake_install
+
+        %files
+        %license LICENSE
+        %doc README.md
+        %{_bindir}/TDownRemaster
+        %{_libdir}/*.so*
+        %{_datadir}/applications/*.desktop
+        %{_datadir}/icons/hicolor/256x256/apps/*.png
+        %{_datadir}/metainfo/*.xml
+
+        %changelog
+        * Thu Mar 14 2024 TDownRemaster Team <support@tdownremaster.com> - 1.0.0-1
+        - Initial RPM release
+        EOF
+        
+        rpmbuild -ba ~/rpmbuild/SPECS/TDownRemaster.spec
+        cp ~/rpmbuild/RPMS/x86_64/TDownRemaster-1.0.0-1.x86_64.rpm ./
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-packages-${{ matrix.distro }}
+        path: |
+          *.AppImage
+          *.deb
+          *.rpm
+
+    - name: Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          *.AppImage
+          *.deb
+          *.rpm
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

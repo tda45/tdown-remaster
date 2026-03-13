@@ -603,8 +603,8 @@ Exemple 2&#xa0;: ${gateway}:8080</translation>
         <translation>Erreur, l&apos;exécutable vers le programme « %1 » n&apos;a pas été trouvé</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Le moteur « %1 » nécessite au moins la version « %2 » de Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Le moteur « %1 » nécessite au moins la version « %2 » de TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

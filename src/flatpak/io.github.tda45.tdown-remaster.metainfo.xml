@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
 
-	<id>io.github.mhogomchungu.media-downloader</id>
+	<id>io.github.tda45.tdown-remaster</id>
 
-	<name>Media Downloader</name>
+	<name>TDown Remaster</name>
 
 	<summary>A GUI to yt-dlp, gallery-dl and others</summary>
 
@@ -11,49 +11,49 @@
 
 	<project_license>GPL-2.0-or-later</project_license>
 
-	<url type="homepage">https://mhogomchungu.github.io/media-downloader</url>
-	<url type="bugtracker">https://github.com/mhogomchungu/media-downloader/issues</url>
-	<url type="vcs-browser">https://github.com/mhogomchungu/media-downloader</url>
-	<url type="faq">https://github.com/mhogomchungu/media-downloader/wiki/Frequently-Asked-Questions</url>
+	<url type="homepage">https://github.com/tda45/tdown-remaster</url>
+	<url type="bugtracker">https://github.com/tda45/tdown-remaster/issues</url>
+	<url type="vcs-browser">https://github.com/tda45/tdown-remaster</url>
+	<url type="faq">https://github.com/tda45/tdown-remaster/wiki/Frequently-Asked-Questions</url>
 
 	<content_rating type="oars-1.1" />
 
-	<developer id="io.github.mhogomchungu">
-		  <name>Francis Banyikwa</name>
+	<developer id="io.github.tda45">
+		  <name>tda45</name>
 	</developer>
 
 	<description><p>This application make it possible to easily download video files, audio files and image files from all sorts of websites.</p></description>
 
-	<launchable type="desktop-id">io.github.mhogomchungu.media-downloader.desktop</launchable>
+	<launchable type="desktop-id">io.github.tda45.tdown-remaster.desktop</launchable>
 
 	<screenshots>
 		<screenshot>
 			<caption>Basic Downloader Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-1.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-1.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Batch Downloader Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-2.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-2.png</image>
 		</screenshot>
 		<screenshot  type="default">
 			<caption>Playlist Downloader Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-3.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-3.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Batch Downloader Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-4.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-4.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Configure Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-5.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-5.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>About Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-6.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-6.png</image>
 		</screenshot>
 		<screenshot>
 			<caption>Library Tab</caption>
-			<image>https://raw.githubusercontent.com/mhogomchungu/media-downloader/8d9e2418b10655f8064b37a5770c064d96b898c1/images/media-downloader-7.png</image>
+			<image>https://raw.githubusercontent.com/tda45/tdown-remaster/main/images/media-downloader-7.png</image>
 		</screenshot>
 	</screenshots>
 
@@ -63,8 +63,8 @@
 	</categories>
 
 	<releases>
-	<release version="5.4.9" type="stable" date="2026-03-06">
-		<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.9/media-downloader-5.4.9.tar.xz</url>
+	<release version="1.0.0" type="stable" date="2024-03-14">
+		<url type="details">https://github.com/tda45/tdown-remaster/releases/download/v1.0.0/TDownRemaster-1.0.0.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -73,7 +73,7 @@
 			</description>
 		</release>
 		<release version="5.4.8" type="stable" date="2026-01-21">
-		<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.8/media-downloader-5.4.8.tar.xz</url>
+		<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.8/media-downloader-5.4.8.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -82,7 +82,7 @@
 			</description>
 		</release>
 		<release version="5.4.7" type="stable" date="2026-01-13">
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.7/media-downloader-5.4.7.tar.xz</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.7/media-downloader-5.4.7.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -91,7 +91,7 @@
 			</description>
 		</release>
 		<release version="5.4.6" type="stable" date="2025-11-17" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.6/media-downloader-5.4.6.tar.xz</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.6/media-downloader-5.4.6.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -102,7 +102,7 @@
 			</description>
 		</release>
 		<release version="5.4.5" type="stable" date="2025-11-15" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.5/media-downloader-5.4.5.tar.xz</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.5/media-downloader-5.4.5.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -111,7 +111,7 @@
 			</description>
 		</release>
 		<release version="5.4.4" type="stable" date="2025-11-12" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.4/media-downloader-5.4.4.tar.xz</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.4/media-downloader-5.4.4.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -120,7 +120,7 @@
 			</description>
 		</release>
 		<release version="5.4.3" type="stable" date="2025-10-01" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.3/media-downloader-5.4.3.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.3/media-downloader-5.4.3.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -130,7 +130,7 @@
 			</description>
 		</release>
 		<release version="5.4.2" type="stable" date="2025-08-01" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.2/media-downloader-5.4.2.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.2/media-downloader-5.4.2.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -139,7 +139,7 @@
 			</description>
 		</release>
 		<release version="5.4.1" type="stable" date="2025-07-11" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.1/media-downloader-5.4.1.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.1/media-downloader-5.4.1.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -153,7 +153,7 @@
 			</description>
 		</release>
 		<release version="5.4.0" type="stable" date="2025-05-29" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.4.0/media-downloader-5.4.0.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.0/media-downloader-5.4.0.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -163,7 +163,7 @@
 			</description>
 		</release>
 		<release version="5.3.3" type="stable" date="2025-05-21" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.3.3/media-downloader-5.3.3.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.3.3/media-downloader-5.3.3.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -173,7 +173,7 @@
 			</description>
 		</release>
 		<release version="5.3.2" type="stable" date="2025-03-24" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.3.2/media-downloader-5.3.2.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.3.2/media-downloader-5.3.2.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -182,7 +182,7 @@
 			</description>
 		</release>
 		<release version="5.3.1" type="stable" date="2025-03-11" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.3.1/media-downloader-5.3.1.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.3.1/media-downloader-5.3.1.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -195,7 +195,7 @@
 			</description>
 		</release>
 		<release version="5.3.0" type="stable" date="2025-03-01" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.3.0/media-downloader-5.3.0.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.3.0/media-downloader-5.3.0.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -205,7 +205,7 @@
 			</description>
 		</release>
 		<release version="5.2.2" type="stable" date="2025-02-08" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.2.2/media-downloader-5.2.2.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.2.2/media-downloader-5.2.2.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -215,7 +215,7 @@
 			</description>
 		</release>
 		<release version="5.2.1" type="stable" date="2025-01-31" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.2.1/media-downloader-5.2.1.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.2.1/media-downloader-5.2.1.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -225,7 +225,7 @@
 			</description>
 		</release>
 		<release version="5.2.0" type="stable" date="2024-11-04" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.2.0/media-downloader-5.2.0.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.2.0/media-downloader-5.2.0.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -236,7 +236,7 @@
 			</description>
 		</release>
 		<release version="5.1.0" type="stable" date="2024-09-05" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.1.0/media-downloader-5.1.0.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.1.0/media-downloader-5.1.0.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -250,7 +250,7 @@
 			</description>
 		</release>
 		<release version="5.0.1" type="stable" date="2024-08-20" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.0.1/media-downloader-5.0.1.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.0.1/media-downloader-5.0.1.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -260,7 +260,7 @@
 			</description>
 		</release>
 		<release version="5.0.0" type="stable" date="2024-08-16" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/5.0.0/media-downloader-5.0.0.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.0.0/media-downloader-5.0.0.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -270,7 +270,7 @@
 			</description>
 		</release>
 		<release version="4.9.0" type="stable" date="2024-08-01" >
-			<url type="details">https://github.com/mhogomchungu/media-downloader/releases/download/4.9.0/media-downloader-4.9.0.1.tar.xz/</url>
+			<url type="details">https://github.com/tda45/tdown-remaster/releases/download/4.9.0/media-downloader-4.9.0.1.tar.xz/</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
@@ -282,6 +282,6 @@
 	</releases>
 
 	<provides>
-		<binary>io.github.mhogomchungu.media-downloader</binary>
+		<binary>io.github.tda45.tdown-remaster</binary>
 	</provides>
 </component>

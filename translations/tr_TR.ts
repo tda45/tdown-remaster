@@ -601,8 +601,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Hata, &quot;%1&quot; arka uçta yürütülebilir dosya bulunamadı</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>&quot;%1&quot; motoru, Medya İndiricinin en az &quot;%2&quot; sürümünü gerektiriyor</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>&quot;%1&quot; motoru, TDown Remaster'ın en az &quot;%2&quot; sürümünü gerektiriyor</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

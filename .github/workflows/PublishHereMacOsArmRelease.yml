@@ -12,7 +12,7 @@ jobs:
     -
       uses: actions/checkout@v4
       with:
-         repository: mhogomchungu/media-downloader
+         repository: tda45/tdown-remaster
          path: MAC
     -
       name: Install Qt6
@@ -42,7 +42,7 @@ jobs:
 
            cp ${{github.workspace}}/MAC/src/media-downloader.icns ${{github.workspace}}/MAC/build6/MediaDownloader.app/Contents/Resources/MediaDownloader.icns
 
-           aria2c -d ${{github.workspace}}/MAC/build6/MediaDownloader.app/Contents/MacOS/extra https://github.com/mhogomchungu/media-downloader-git/releases/download/0.0.0/ffmpeg-macos-arm.zip
+           aria2c -d ${{github.workspace}}/MAC/build6/MediaDownloader.app/Contents/MacOS/extra https://github.com/tda45/tdown-remaster/releases/download/0.0.0/ffmpeg-macos-arm.zip
 
            cd ${{github.workspace}}/MAC/build6/MediaDownloader.app/Contents/MacOS/extra
            tar -xf ffmpeg-macos-arm.zip

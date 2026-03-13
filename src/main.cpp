@@ -68,11 +68,14 @@ int start( int argc,char * argv[],
 
 	if( utility::platformisFlatPak() ){
 
-		mqApp.setDesktopFileName( "io.github.mhogomchungu.media-downloader" ) ;
+		mqApp.setDesktopFileName( "io.github.tda45.tdown-remaster" ) ;
 	}else{
-		mqApp.setDesktopFileName( "media-downloader" ) ;
+		mqApp.setDesktopFileName( "tdown-remaster" ) ;
 	}
 #endif
+
+	mqApp.setApplicationName( "TDownRemaster" ) ;
+	mqApp.setOrganizationName( "TDownRemaster" ) ;
 
 	ss.setTheme( mqApp,paths.themePath() ) ;
 

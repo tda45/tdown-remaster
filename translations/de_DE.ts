@@ -601,8 +601,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Fehler, ausführbare Datei zum Backend &quot;%1&quot; konnte nicht gefunden werden</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Download-Tool &quot;%1&quot; erfordert mindestens Version &quot;%2&quot; von Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Download-Tool &quot;%1&quot; erfordert mindestens Version &quot;%2&quot; von TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=TDown Remaster
+Comment=A Qt based GUI frontend to yt-dlp, gallery-dl, lux, svtplay-dl and others
+Icon=io.github.tda45.tdown-remaster
+Exec=io.github.tda45.tdown-remaster
+StartupWMClass=io.github.tda45.tdown-remaster
+Categories=Network;Qt

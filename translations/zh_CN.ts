@@ -603,8 +603,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>错误，找不到后端 &quot;%1&quot; 的可执行文件</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>引擎 &quot;%1&quot; 至少需要 Media Downloader 版本 &quot;%2&quot;</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>引擎 &quot;%1&quot; 至少需要 TDown Remaster 版本 &quot;%2&quot;</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

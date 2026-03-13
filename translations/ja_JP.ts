@@ -601,8 +601,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>エラー, バックエンド &quot;%1&quot; の実行ファイルが見つかりません</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>エンジン &quot;%1&quot; には少なくともバージョン &quot;%2&quot; 以上のMedia Downloaderが必要です</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>エンジン &quot;%1&quot; には少なくともバージョン &quot;%2&quot; 以上のTDown Remasterが必要です</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

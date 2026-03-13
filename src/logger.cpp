@@ -47,11 +47,11 @@ void Logger::registerDone( int id )
 
 void Logger::add( const QByteArray& s,int id )
 {
-	if( s.startsWith( "[media-downloader]" ) ){
+	if( s.startsWith( "[TDownRemaster]" ) ){
 
 		m_processOutPuts.add( s,id ) ;
 	}else{
-		m_processOutPuts.add( "[media-downloader] " + s,id ) ;
+		m_processOutPuts.add( "[TDownRemaster] " + s,id ) ;
 	}
 
 	this->update() ;

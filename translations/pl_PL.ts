@@ -603,8 +603,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Błąd, plik wykonywalny &quot;%1&quot; nie został znaleziony</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Silnik &quot;%1&quot; wymaga aplikacji Media Downloader w wersji &quot;%2&quot; lub wyższej</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Silnik &quot;%1&quot; wymaga aplikacji TDown Remaster w wersji &quot;%2&quot; lub wyższej</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

@@ -336,9 +336,9 @@ QString settings::gitHubDownloadUrl()
 
 	if( m.compare( "release",Qt::CaseInsensitive ) == 0 ){
 
-		return "https://api.github.com/repos/mhogomchungu/media-downloader/releases/latest" ;
+		return "https://api.github.com/repos/tda45/tdown-remaster/releases/latest" ;
 	}else{
-		return "https://api.github.com/repos/mhogomchungu/media-downloader-git/releases/latest" ;
+		return "https://api.github.com/repos/tda45/tdown-remaster/releases/latest" ;
 	}
 }
 
@@ -369,7 +369,7 @@ std::unique_ptr< QSettings > settings::init()
 			/*
 			 * Migrating to .ini config file
 			 */
-			QSettings oldSettings( "media-downloader","media-downloader" ) ;
+			QSettings oldSettings( "TDownRemaster","TDownRemaster" ) ;
 
 			auto newSettings = this->setConfig( m_appDataPath ) ;
 
@@ -395,9 +395,9 @@ QString settings::appDataLocation()
 
 	if( s.isEmpty() ){
 
-		return QDir::homePath() + "/.local/share/media-downloader/" ;
+		return QDir::homePath() + "/.local/share/TDownRemasterData/" ;
 	}else{
-		return s.first() + "/media-downloader/" ;
+		return s.first() + "/TDownRemasterData/" ;
 	}
 }
 
@@ -594,17 +594,17 @@ QIcon settings::getIcon( const QString& e )
 {
 	if( e == "media-downloader" ){
 
-		auto m = "io.github.mhogomchungu.media-downloader" ;
+		auto m = "io.github.tda45.tdown-remaster" ;
 
 		return QIcon::fromTheme( m,QIcon( ":/media-downloader" ) ) ;
 
 	}else if( this->darkTheme() ){
 
-		auto m = "io.github.mhogomchungu.media-downloader_white_" + e ;
+		auto m = "io.github.tda45.tdown-remaster_white_" + e ;
 
 		return QIcon::fromTheme( m,QIcon( ":/icons/white/" + e ) ) ;
 	}else{
-		auto m = "io.github.mhogomchungu.media-downloader_black_" + e ;
+		auto m = "io.github.tda45.tdown-remaster_black_" + e ;
 
 		return QIcon::fromTheme( m,QIcon( ":/icons/black/" + e ) ) ;
 	}
@@ -1238,7 +1238,7 @@ QString settings::localizationLanguagePath()
 	}else{
 		auto m = QCoreApplication::applicationDirPath() ;
 
-		return m + "/../share/media-downloader/translations/" ;
+		return m + "/../share/TDownRemasterData/translations/" ;
 	}
 }
 

@@ -615,8 +615,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>오류, 백엔드 &quot;%1&quot;에 대한 실행 파일을 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>엔진 &quot;%1&quot;에는 최소한 Media Downloader 버전 &quot;%2&quot;이 필요합니다.</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>엔진 &quot;%1&quot;에는 최소한 TDown Remaster 버전 &quot;%2&quot;이 필요합니다.</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

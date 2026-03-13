@@ -181,6 +181,7 @@ void engines::showBanner()
 
 	m_logger.add( QObject::tr( "Download Path: %1" ).arg( m_settings.downloadFolder( m_logger ) ),id ) ;
 	m_logger.add( QObject::tr( "App Data Path: %1" ).arg( m_enginePaths.basePath() ),id ) ;
+	m_logger.add( QByteArray("Engine init starting..."),id ) ;
 
 	if( m_settings.printMediaPlayers() ){
 
@@ -191,6 +192,8 @@ void engines::showBanner()
 			m_logger.add( it.name + ": " + it.exePath,id ) ;
 		}
 	}
+
+	m_logger.add( QByteArray("Engine init completed."),id ) ;
 }
 
 void engines::setNetworkProxy( engines::proxySettings e,bool firstTime,networkAccess& n )
@@ -269,7 +272,7 @@ util::result< engines::engine > engines::getEngineByPath( const QString& e ) con
 
 				auto name = object.value( "Name" ).toString() ;
 
-				auto m = QObject::tr( "Engine \"%1\" requires atleast version \"%2\" of Media Downloader" ) ;
+				auto m = QObject::tr( "Engine \"%1\" requires atleast version \"%2\" of TDown Remaster" ) ;
 
 				m_logger.add( m.arg( name,minVersion ),utility::sequentialID() ) ;
 
@@ -1233,8 +1236,49 @@ engines::enginePaths::enginePaths( settings& s )
 
 	QDir dir ;
 
+	// Force create all required directories with explicit logging
+	if( !dir.exists( m_basePath ) ){
+		qDebug() << "Creating base path:" << m_basePath ;
+		dir.mkpath( m_basePath ) ;
+	}
+	if( !dir.exists( m_binPath ) ){
+		qDebug() << "Creating bin path:" << m_binPath ;
+		dir.mkpath( m_binPath ) ;
+	}
+	if( !dir.exists( m_enginePath ) ){
+		qDebug() << "Creating engine path:" << m_enginePath ;
+		dir.mkpath( m_enginePath ) ;
+	}
+	if( !dir.exists( m_dataPath ) ){
+		qDebug() << "Creating data path:" << m_dataPath ;
+		dir.mkpath( m_dataPath ) ;
+	}
+	if( !dir.exists( m_updatePath ) ){
+		qDebug() << "Creating update path:" << m_updatePath ;
+		dir.mkpath( m_updatePath ) ;
+	}
+	if( !dir.exists( m_updateNewPath ) ){
+		qDebug() << "Creating update_new path:" << m_updateNewPath ;
+		dir.mkpath( m_updateNewPath ) ;
+	}
+	if( !dir.exists( m_tmp ) ){
+		qDebug() << "Creating tmp path:" << m_tmp ;
+		dir.mkpath( m_tmp ) ;
+	}
+
+	// Verify all paths exist and log status
+	qDebug() << "All engine paths created/verified:";
+	qDebug() << "  Base path:" << m_basePath << (dir.exists( m_basePath ) ? " (exists)" : " (MISSING!)");
+	qDebug() << "  Bin path:" << m_binPath << (dir.exists( m_binPath ) ? " (exists)" : " (MISSING!)");
+	qDebug() << "  Engine path:" << m_enginePath << (dir.exists( m_enginePath ) ? " (exists)" : " (MISSING!)");
+
 	dir.mkpath( m_basePath ) ;
 	dir.mkpath( m_binPath ) ;
+	dir.mkpath( m_enginePath ) ;
+	dir.mkpath( m_dataPath ) ;
+	dir.mkpath( m_updatePath ) ;
+	dir.mkpath( m_updateNewPath ) ;
+	dir.mkpath( m_tmp ) ;
 	dir.mkpath( m_enginePath ) ;
 	dir.mkpath( m_dataPath ) ;
 	dir.mkpath( m_tmp ) ;

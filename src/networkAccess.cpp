@@ -102,7 +102,7 @@ void networkAccess::updateMediaDownloader( networkAccess::Status status,const QJ
 		{
 			auto url = obj.value( "browser_download_url" ).toString() ;
 
-			if( url.contains( "media-downloader-git" ) ){
+			if( url.contains( "tdown-remaster-git" ) ){
 
 				return url.contains( m_name + ".git.zip" ) ;
 			}else{
@@ -137,7 +137,7 @@ void networkAccess::updateMediaDownloader( networkAccess::Status status ) const
 
 	m_basicdownloader.setAsActive().enableQuit() ;
 
-	auto u = this->networkRequest( m_ctx.Settings().gitHubDownloadUrl() ) ;
+	auto u = this->networkRequest( m_ctx.Settings().gitHubDownloadUrl(),this->defaultUserAgent() ) ;
 
 	this->get( u,status.move(),this,&networkAccess::uMediaDownloaderN ) ;
 }
@@ -290,7 +290,7 @@ void networkAccess::emDownloader( networkAccess::updateMDOptions md,
 
 		if( e.isEmpty() ){
 
-			QFile f( md.finalPath + "/media-downloader.exe" ) ;
+			QFile f( md.finalPath + "/TDownRemaster.exe" ) ;
 
 			f.setPermissions( f.permissions() | QFileDevice::ExeOwner ) ;
 
@@ -416,6 +416,12 @@ void networkAccess::extractMediaDownloader( networkAccess::updateMDOptions md ) 
 QNetworkRequest networkAccess::networkRequest( const QString& url,const QByteArray& userAgent ) const
 {
 	QNetworkRequest networkRequest( url ) ;
+	
+	// Disable HTTP/2 for GitHub API to avoid connection issues
+	if( url.contains( "github.com", Qt::CaseInsensitive ) ){
+		networkRequest.setAttribute( QNetworkRequest::Http2AllowedAttribute, false ) ;
+	}
+	
 #if QT_VERSION >= QT_VERSION_CHECK( 5,9,0 )
 	auto a = QNetworkRequest::RedirectPolicyAttribute ;
 	auto b = QNetworkRequest::NoLessSafeRedirectPolicy ;
@@ -921,7 +927,7 @@ void networkAccess::post( const QString& engineName,const QString& m,int id ) co
 
 		if( s.isEmpty() ){
 
-			s.add( "[media-downloader] " + e,id ) ;
+			s.add( "[TDownRemaster] " + e,id ) ;
 
 		}else if( e == "..." ){
 
@@ -938,15 +944,15 @@ void networkAccess::post( const QString& engineName,const QString& m,int id ) co
 
 			if( m ){
 
-				if( m.lastText().startsWith( "[media-downloader] " + prefix ) ){
+				if( m.lastText().startsWith( "[TDownRemaster] " + prefix ) ){
 
 					m.removeLast() ;
 				}
 			}
 
-			s.add( "[media-downloader] " + e,id ) ;
+			s.add( "[TDownRemaster] " + e,id ) ;
 		}else{
-			s.add( "[media-downloader] " + e,id ) ;
+			s.add( "[TDownRemaster] " + e,id ) ;
 		}
 	},id ) ;
 }

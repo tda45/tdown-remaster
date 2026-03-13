@@ -601,8 +601,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Fel, den körbara filen &quot;%1&quot; hittades inte</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Motorn &quot;%1&quot; kräver minst version &quot;%2&quot; av Media downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Motorn &quot;%1&quot; kräver minst version &quot;%2&quot; av TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

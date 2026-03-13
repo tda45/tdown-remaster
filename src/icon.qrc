@@ -2,7 +2,7 @@
  <!DOCTYPE RCC>
  <RCC version="1.0">
 	 <qresource>
-		<file>media-downloader.png</file>
+		<file>tdown-remaster.png</file>
 		<file>icons/black/folder.png</file>
 		<file>icons/black/video.png</file>
 		<file>icons/black/executable.png</file>

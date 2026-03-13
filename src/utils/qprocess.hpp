@@ -77,7 +77,7 @@ namespace utils
 					m_exe.start( cmd,args ) ;
 				}
 			private:
-				auto errorSignal()
+				void( QProcess::* errorSignal() )( QProcess::ProcessError )
 				{
 				#if QT_VERSION >= QT_VERSION_CHECK( 5,6,0 )
 					return &QProcess::errorOccurred ;

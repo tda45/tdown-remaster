@@ -1970,7 +1970,7 @@ bool utility::startedUpdatedVersion( settings& s,const utility::cliArguments& ca
 		dir.rename( update_new,update ) ;
 	}
 
-	QString exePath = update + "/media-downloader.exe" ;
+	QString exePath = update + "/TDownRemaster.exe" ;
 
 	if( QFile::exists( exePath ) && !cargs.runningUpdated() ){
 

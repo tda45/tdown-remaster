@@ -637,8 +637,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Om deze controles uit te schakelen, doet u het volgende:-</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Programma &quot;%1&quot; vereist minimaal versie &quot;%2&quot; van Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Programma &quot;%1&quot; vereist minimaal versie &quot;%2&quot; van TDown Remaster</translation>
     </message>
     <message>
         <source>Error, executable to backend &quot;%1&quot; could not be found</source>

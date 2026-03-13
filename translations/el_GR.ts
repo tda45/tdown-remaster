@@ -604,8 +604,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Σφάλμα, δεν ήταν δυνατή η εύρεση του εκτελέσιμου στο backend &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Η μηχανή &quot;%1&quot; απαιτεί τουλάχιστον την έκδοση &quot;%2&quot; του Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Η μηχανή &quot;%1&quot; απαιτεί τουλάχιστον την έκδοση &quot;%2&quot; του TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

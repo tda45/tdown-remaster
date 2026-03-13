@@ -4,7 +4,7 @@ else()
     cmake_minimum_required(VERSION 3.0.2)
 endif()
 
-project(media-downloader LANGUAGES CXX)
+project(TDownRemaster LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
@@ -14,8 +14,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set( PGR_VERSION "5.4.9" )
-set( COPYRIGHT_YEARS "2021-2026" )
+set( PGR_VERSION "1.0.0" )
+set( COPYRIGHT_YEARS "2026" )
 
 INCLUDE(GNUInstallDirs)
 
@@ -113,8 +113,8 @@ set(SRC
     src/engines/wget.cpp
     src/engines/svtplay-dl.cpp
     src/engines/you-get.cpp
-    src/engines/getsauce.cpp
     src/engines/gallery-dl.cpp
+    src/engines/getsauce.cpp
     src/engines/quickjs.cpp
     src/engines/deno.cpp)
 
@@ -122,38 +122,41 @@ set(RESOURCES src/icon.qrc )
 
 if(WIN32)
     set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/src/appicon.rc")
-    add_executable(media-downloader WIN32 ${SRC} ${MOC_FILES} ${UI_FILES} ${RESOURCES} ${APP_ICON_RESOURCE_WINDOWS})
-    set_target_properties(media-downloader PROPERTIES COMPILE_FLAGS "-Wextra -Wall -s -pedantic")
+    add_executable(TDownRemaster WIN32 ${SRC} ${MOC_FILES} ${UI_FILES} ${RESOURCES} ${APP_ICON_RESOURCE_WINDOWS})
+    set_target_properties(TDownRemaster PROPERTIES COMPILE_FLAGS "/W3")
+    if(MSVC)
+        set_target_properties(TDownRemaster PROPERTIES COMPILE_DEFINITIONS "_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS")
+    endif()
 else()
     if(APPLE)
-        set(icon "${CMAKE_CURRENT_SOURCE_DIR}/src/media-downloader.icns")
+        set(icon "${CMAKE_CURRENT_SOURCE_DIR}/src/TDownRemaster.icns")
         add_executable(MediaDownloader MACOSX_BUNDLE ${SRC} ${MOC_FILES} ${UI_FILES} ${RESOURCES} ${icon})
         set_target_properties(MediaDownloader PROPERTIES MACOSX_BUNDLE ON)
         set_target_properties(MediaDownloader PROPERTIES COMPILE_FLAGS "-Wextra -Wall -s -fPIC -pedantic")
     else()
-        add_executable(media-downloader ${SRC} ${MOC_FILES} ${UI_FILES} ${RESOURCES})
-        set_target_properties(media-downloader PROPERTIES COMPILE_FLAGS "-Wextra -Wall -s -fPIC -pedantic")
+        add_executable(TDownRemaster ${SRC} ${MOC_FILES} ${UI_FILES} ${RESOURCES})
+        set_target_properties(TDownRemaster PROPERTIES COMPILE_FLAGS "-Wextra -Wall -s -fPIC -pedantic")
     endif()
 endif()
 
 if(BUILD_WITH_QT6)
     if(WIN32)
-        target_link_libraries(media-downloader Advapi32.lib Dwmapi.lib Iphlpapi.lib Qt6::Widgets Qt6::Core Qt6::Network)
+        target_link_libraries(TDownRemaster Advapi32.lib Dwmapi.lib Iphlpapi.lib Qt6::Widgets Qt6::Core Qt6::Network)
     else()
         if(APPLE)
             target_link_libraries(MediaDownloader Qt6::Widgets Qt6::Core Qt6::Network)
         else()
-            target_link_libraries(media-downloader Qt6::Widgets Qt6::Core Qt6::Network)
+            target_link_libraries(TDownRemaster Qt6::Widgets Qt6::Core Qt6::Network)
         endif()
     endif()
 else()
     if(WIN32)
-        target_link_libraries(media-downloader Advapi32.lib Dwmapi.lib Iphlpapi.lib Qt5::Widgets Qt5::Core Qt5::Network)
+        target_link_libraries(TDownRemaster Advapi32.lib Dwmapi.lib Iphlpapi.lib Qt5::Widgets Qt5::Core Qt5::Network)
     else()
         if(APPLE)
              target_link_libraries(MediaDownloader Qt5::Widgets Qt5::Core Qt5::Network)
         else()
-            target_link_libraries(media-downloader Qt5::Widgets Qt5::Core Qt5::Network)
+            target_link_libraries(TDownRemaster Qt5::Widgets Qt5::Core Qt5::Network)
         endif()
     endif()
 endif()
@@ -161,21 +164,21 @@ endif()
 if(APPLE)
 else()
     if(BUILD_FLATPAK)
-        set_target_properties( media-downloader PROPERTIES OUTPUT_NAME io.github.mhogomchungu.media-downloader)
-        install(TARGETS media-downloader RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-        install(FILES src/flatpak/io.github.mhogomchungu.media-downloader.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
-        install(FILES src/flatpak/io.github.mhogomchungu.media-downloader.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps)
-        install(FILES src/flatpak/io.github.mhogomchungu.media-downloader.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+        set_target_properties( TDownRemaster PROPERTIES OUTPUT_NAME io.github.tda45.tdown-remaster)
+        install(TARGETS TDownRemaster RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+        install(FILES src/flatpak/io.github.tda45.tdown-remaster.metainfo.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+        install(FILES src/TDownRemaster.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/512x512/apps RENAME io.github.tda45.tdown-remaster.png)
+        install(FILES src/flatpak/io.github.tda45.tdown-remaster.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
     else()
-        install(TARGETS media-downloader RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
-        install(FILES src/media-downloader.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
-        install(FILES src/media-downloader.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pixmaps)
+        install(TARGETS TDownRemaster RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+        install(FILES src/TDownRemaster.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+        install(FILES src/TDownRemaster.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pixmaps)
     endif()
 endif()
 
-install(DIRECTORY translations DESTINATION ${CMAKE_INSTALL_DATADIR}/media-downloader FILES_MATCHING PATTERN "*.qm")
+install(DIRECTORY translations DESTINATION ${CMAKE_INSTALL_DATADIR}/TDownRemaster FILES_MATCHING PATTERN "*.qm")
 
-file(WRITE ${PROJECT_BINARY_DIR}/locale_path.h "\n#define TRANSLATION_PATH \"${CMAKE_INSTALL_FULL_DATADIR}/media-downloader/translations/\"\n")
+file(WRITE ${PROJECT_BINARY_DIR}/locale_path.h "\n#define TRANSLATION_PATH \"${CMAKE_INSTALL_FULL_DATADIR}/TDownRemaster/translations/\"\n")
 
 set( OutputBaseFilename "MediaDownloader-${PGR_VERSION}.setup" )
 
@@ -205,18 +208,18 @@ file(WRITE ${PROJECT_BINARY_DIR}/VERSION_INFO "${PGR_VERSION}")
 
 if(BUILD_WITH_QT6)
 
-file(WRITE ${PROJECT_BINARY_DIR}/media-downloader_windows_installer_Qt6.iss
+file(WRITE ${PROJECT_BINARY_DIR}/TDownRemaster_windows_installer_Qt6.iss
 "
 ; Script generated by the Inno Setup Script Wizard.
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
-#define MyAppName            \"Media Downloader\"
+#define MyAppName            \"TDown Remaster\"
 #define MyAppVersion         \"${PGR_VERSION}\"
 #define MyAppPublisher       \"Francis Banyikwa\"
-#define MyAppURL             \"https://github.com/mhogomchungu/media-downloader\"
-#define MyAppExeName         \"media-downloader.exe\"
+#define MyAppURL             \"https://github.com/tda45/tdown-remaster\"
+#define MyAppExeName         \"TDownRemaster.exe\"
 #define MyAppCopyright       \"${COPYRIGHT_YEARS}, Francis Banyikwa\"
-#define MyEXELocation        \"${PROJECT_BINARY_DIR}\\media-downloader.exe\"
+#define MyEXELocation        \"${PROJECT_BINARY_DIR}\\TDownRemaster.exe\"
 #define MyBuildPath          \"${PROJECT_BINARY_DIR}\"
 #define MyLibrariesLocation  \"${LIBRARIES_LOCATION}\"
 #define MyOutPutPath         \"${OUTPUT_PATH}\"
@@ -241,7 +244,7 @@ UninstallDisplayIcon={app}\\{#MyAppExeName}
 DefaultDirName={pf}\\{#MyAppName}
 LicenseFile={#MySourcesPath}\\LICENSE.txt
 OutputDir={#MyOutPutPath}
-SetupIconFile={#MySourcesPath}\\src\\media-downloader.ico
+SetupIconFile={#MySourcesPath}\\src\\tdown-remaster.ico
 Compression=lzma
 SolidCompression=yes
 DisableProgramGroupPage=yes
@@ -264,15 +267,15 @@ Source: {#MyLibrariesLocation}\\tls\\*; DestDir: {app}\\tls; Flags: ignoreversio
 Source: {#MyLibrariesLocation}\\networkinformation\\*; DestDir: {app}\\networkinformation; Flags: ignoreversion
 Source: {#MyLibrariesLocation}\\3rdParty\\*; DestDir: {app}\\3rdParty; Flags: ignoreversion recursesubdirs
 Source: {#MySourcesPath}\\translations\\*; DestDir: {app}\\translations; Flags: ignoreversion
-Source: {#MySourcesPath}\\src\\media-downloader.ico; DestDir: {app}\\icons; Flags: ignoreversion
+Source: {#MySourcesPath}\\src\\tdown-remaster.ico; DestDir: {app}\\icons; Flags: ignoreversion
 
 ; NOTE: Don't use \"Flags: ignoreversion\" on any shared system files
 
 [Icons]
-Name: \"{commonprograms}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"
-;Name: \"{commonprograms}\\Uninstall {#MyAppName}\"; Filename: \"{uninstallexe}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"
-Name: \"{commondesktop}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"; Tasks: desktopicon
-Name: \"{userappdata}\\Microsoft\\Internet Explorer\\Quick Launch\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloade.ico\"; WorkingDir: \"{app}\"; Tasks: quicklaunchicon
+Name: \"{commonprograms}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"
+;Name: \"{commonprograms}\\Uninstall {#MyAppName}\"; Filename: \"{uninstallexe}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"
+Name: \"{commondesktop}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"; Tasks: desktopicon
+Name: \"{userappdata}\\Microsoft\\Internet Explorer\\Quick Launch\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"; Tasks: quicklaunchicon
 
 [Run]
 Filename: \"{app}\\{#MyAppExeName}\"; Description: \"{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}\"; Flags: nowait postinstall skipifsilent
@@ -303,18 +306,18 @@ Name: \"ukrainian\"           ; MessagesFile: \"compiler:Languages\\Ukrainian.is
 
 else()
 
-file(WRITE ${PROJECT_BINARY_DIR}/media-downloader_windows_installer_Qt5.iss
+file(WRITE ${PROJECT_BINARY_DIR}/TDownRemaster_windows_installer_Qt5.iss
 "
 ; Script generated by the Inno Setup Script Wizard.
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
-#define MyAppName            \"Media Downloader\"
+#define MyAppName            \"TDown Remaster\"
 #define MyAppVersion         \"${PGR_VERSION}\"
-#define MyAppPublisher       \"Francis Banyikwa\"
-#define MyAppURL             \"https://github.com/mhogomchungu/media-downloader\"
-#define MyAppExeName         \"media-downloader.exe\"
-#define MyAppCopyright       \"${COPYRIGHT_YEARS}, Francis Banyikwa\"
-#define MyEXELocation        \"${PROJECT_BINARY_DIR}\\media-downloader.exe\"
+#define MyAppPublisher       \"Tda_45\"
+#define MyAppURL             \"https://github.com/tda45/tdown-remaster\"
+#define MyAppExeName         \"TDownRemaster.exe\"
+#define MyAppCopyright       \"${COPYRIGHT_YEARS}, tda45\"
+#define MyEXELocation        \"${PROJECT_BINARY_DIR}\\TDownRemaster.exe\"
 #define MyBuildPath          \"${PROJECT_BINARY_DIR}\"
 #define MyLibrariesLocation  \"${LIBRARIES_LOCATION}\"
 #define MyOutPutPath         \"${OUTPUT_PATH}\"
@@ -339,7 +342,7 @@ UninstallDisplayIcon={app}\\{#MyAppExeName}
 DefaultDirName={pf}\\{#MyAppName}
 LicenseFile={#MySourcesPath}\\LICENSE.txt
 OutputDir={#MyOutPutPath}
-SetupIconFile={#MySourcesPath}\\src\\media-downloader.ico
+SetupIconFile={#MySourcesPath}\\src\\tdown-remaster.ico
 Compression=lzma
 SolidCompression=yes
 DisableProgramGroupPage=yes
@@ -360,15 +363,15 @@ Source: {#MyLibrariesLocation}\\styles\\*; DestDir: {app}\\styles; Flags: ignore
 Source: {#MyLibrariesLocation}\\platforms\\*; DestDir: {app}\\platforms; Flags: ignoreversion
 Source: {#MyLibrariesLocation}\\3rdParty\\*; DestDir: {app}\\3rdParty; Flags: ignoreversion recursesubdirs
 Source: {#MySourcesPath}\\translations\\*; DestDir: {app}\\translations; Flags: ignoreversion
-Source: {#MySourcesPath}\\src\\media-downloader.ico; DestDir: {app}\\icons; Flags: ignoreversion
+Source: {#MySourcesPath}\\src\\tdown-remaster.ico; DestDir: {app}\\icons; Flags: ignoreversion
 
 ; NOTE: Don't use \"Flags: ignoreversion\" on any shared system files
 
 [Icons]
-Name: \"{commonprograms}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"
-;Name: \"{commonprograms}\\Uninstall {#MyAppName}\"; Filename: \"{uninstallexe}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"
-Name: \"{commondesktop}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloader.ico\"; WorkingDir: \"{app}\"; Tasks: desktopicon
-Name: \"{userappdata}\\Microsoft\\Internet Explorer\\Quick Launch\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\media-downloade.ico\"; WorkingDir: \"{app}\"; Tasks: quicklaunchicon
+Name: \"{commonprograms}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"
+;Name: \"{commonprograms}\\Uninstall {#MyAppName}\"; Filename: \"{uninstallexe}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"
+Name: \"{commondesktop}\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"; Tasks: desktopicon
+Name: \"{userappdata}\\Microsoft\\Internet Explorer\\Quick Launch\\{#MyAppName}\"; Filename: \"{app}\\{#MyAppExeName}\"; IconFilename: \"{app}\\icons\\tdown-remaster.ico\"; WorkingDir: \"{app}\"; Tasks: quicklaunchicon
 
 [Run]
 Filename: \"{app}\\{#MyAppExeName}\"; Description: \"{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}\"; Flags: nowait postinstall skipifsilent
@@ -402,13 +405,13 @@ endif()
 if(APPLE)
 
     SET( qtconf_dest_dir MediaDownloader.app/Contents/Resources )
-    SET(MACOSX_BUNDLE_ICON_FILE media-downloader.icns)
+    SET(MACOSX_BUNDLE_ICON_FILE TDownRemaster.icns)
     SET( APPS "\${CMAKE_INSTALL_PREFIX}/MediaDownloader.app" )
 
     set_target_properties( MediaDownloader
 	                   PROPERTIES
 			   MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/src/MacOSXBundleInfo.plist.in"
-			   MACOSX_BUNDLE_ICON_FILE "media-downloader.icns"
+			   MACOSX_BUNDLE_ICON_FILE "TDownRemaster.icns"
 			   MACOSX_BUNDLE_NAME "MediaDownloader"
 			   MACOSX_BUNDLE_VERSION "${PGR_VERSION}"
 			   MACOSX_BUNDLE_LONG_VERSION_STRING "${PGR_VERSION}"
@@ -418,7 +421,7 @@ if(APPLE)
 
     install( TARGETS MediaDownloader BUNDLE DESTINATION . COMPONENT Runtime )
 
-    file( COPY src/media-downloader.icns DESTINATION  "MediaDownloader.app/Contents/Resources/" )
+    file( COPY src/TDownRemaster.icns DESTINATION  "MediaDownloader.app/Contents/Resources/" )
     file( COPY translations/ar.qm DESTINATION        "MediaDownloader.app/Contents/Resources/translations/" )
     file( COPY translations/de_DE.qm DESTINATION     "MediaDownloader.app/Contents/Resources/translations/" )
     file( COPY translations/en_US.qm DESTINATION     "MediaDownloader.app/Contents/Resources/translations/" )

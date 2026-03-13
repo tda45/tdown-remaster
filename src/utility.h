@@ -259,11 +259,11 @@ namespace utility
 		{
 			if( p.cancelled() ){
 
-				return "[media-downloader] Download Cancelled" ;
+				return "[TDownRemaster] Download Cancelled" ;
 
 			}else if( p.success() ){
 
-				return "[media-downloader] Download Completed Successfully" ;
+				return "[TDownRemaster] Download Completed Successfully" ;
 			}else{
 				using st = engines::ProcessExitState::ExitStatus ;
 				auto m = p.exitStatus() ;
@@ -272,23 +272,23 @@ namespace utility
 
 					auto m = QString::number( p.exitCode() ).toUtf8() ;
 
-					return "[media-downloader] Download Failed(ErrorCode=" + m + ")" ;
+					return "[TDownRemaster] Download Failed(ErrorCode=" + m + ")" ;
 
 				}else if( m == st::FailedToStart ){
 
-					return "[media-downloader] Download Failed, Engine failed to start" ;
+					return "[TDownRemaster] Download Failed, Engine failed to start" ;
 				}else{
-					return "[media-downloader] Download Failed, Engine crashed" ;
+					return "[TDownRemaster] Download Failed, Engine crashed" ;
 				}
 			}
 		}
 		static bool doneDownloadingText( const QByteArray& e )
 		{
-			return e.startsWith( "[media-downloader] Download " ) ;
+			return e.startsWith( "[TDownRemaster] Download " ) ;
 		}
 		static bool downloadFailed( const QByteArray& e )
 		{
-			return e.startsWith( "[media-downloader] Download Failed" ) ;
+			return e.startsWith( "[TDownRemaster] Download Failed" ) ;
 		}
 		static QString uploadDate()
 		{

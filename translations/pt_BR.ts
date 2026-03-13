@@ -603,8 +603,8 @@ Exemplo 2: ${gateway}:8080</translation>
         <translation>Erro, o executável para o backend &quot;%1&quot; não pôde ser encontrado</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>A Engine &quot;%1&quot; requer pelo menos a versão &quot;%2&quot; do Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>A Engine &quot;%1&quot; requer pelo menos a versão &quot;%2&quot; do TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>

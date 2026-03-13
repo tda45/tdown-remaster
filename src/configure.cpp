@@ -861,11 +861,9 @@ void configure::downloadExtension( const QString& name )
 
 QString configure::setUrl( const QString& e )
 {
-	QString hash = "b05e3bafdf049f85673b54654a5175be2d2cdab2" ;
+	QString url = "https://raw.githubusercontent.com/tda45/tdown-remaster/master/extensions/" ;
 
-	QString url = "https://raw.githubusercontent.com/mhogomchungu/media-downloader/" ;
-
-	return url + hash + "/extensions/" + e ;
+	return url + e ;
 }
 
 void configure::init_done()

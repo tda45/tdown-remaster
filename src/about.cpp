@@ -54,12 +54,12 @@ about::about( const Context& ctx ) : m_ctx( ctx )
 
 void about::retranslateUi()
 {
-	auto url = ": <a href=\"https://github.com/mhogomchungu/media-downloader\">https://github.com/mhogomchungu/media-downloader</a>" ;
-	auto version   = QObject::tr( "Version" ) ;
-	auto website   = QObject::tr( "Project Page" ) + url ;
-	auto copyright = QObject::tr( "Copyright" ) ;
-	auto license   = QObject::tr( "License" ) ;
-	auto email     = QObject::tr( "Email" ) ;
+	auto url = ": <a href=\"https://github.com/tda45/tdown-remaster\">https://github.com/tda45/tdown-remaster</a>" ;
+	auto version   = QObject::tr( "Versiyon" ) ;
+	auto website   = QObject::tr( "Proje Sayfası" ) + url ;
+	auto copyright = QObject::tr( "Telif Hakkı" ) ;
+	auto license   = QObject::tr( "Lisans" ) ;
+	auto email     = QObject::tr( "E-Posta" ) ;
 
 	auto QtVersion = [ & ](){
 
@@ -71,10 +71,10 @@ void about::retranslateUi()
 		}
 	}() ;
 
-	auto banner1 = QObject::tr( "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version." ) ;
-	auto banner2 = QObject::tr( "This program is distributed in the hope that it will be useful,but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details." ) ;
+	auto banner1 = QObject::tr( "Bu program ücretsiz bir yazılımdır; Özgür Yazılım Vakfı tarafından yayınlanan GNU Genel Kamu Lisansı koşulları altında yeniden dağıtabilir ve/veya değiştirebilirsiniz; Lisansın 2. sürümü veya (isteğe bağlı olarak) herhangi bir sonraki sürümü." ) ;
+	auto banner2 = QObject::tr( "Bu program yararlı olması ümidiyle dağıtılmıştır, ancak HİÇBİR GARANTİ YOKTUR; SATILABİLİRLİK veya BELİRLİ BİR AMACA UYGUNLUK zımni garantisi bile yoktur. Daha fazla ayrıntı için GNU Genel Kamu Lisansına bakınız." ) ;
 
-	auto about = QString( "<br><br><br><br><center>%1: %2<br><br>%3%4: %5, Francis Banyikwa<br><br>%6: mhogomchungu@gmail.com<br><br>%7<br><br>%8: GPLv2+<br><br>" + banner1 + "<br><br>" + banner2 + "</center>" ) ;
+	auto about = QString( "<br><br><br><br><center>%1: %2<br><br>%3%4: %5, Tda_45<br><br>%6: tahadikbas45@gmail.com<br><br>%7<br><br>%8: GPLv2+<br><br>" + banner1 + "<br><br>" + banner2 + "</center>" ) ;
 
 	auto vv = utility::aboutVersionInfo() ;
 

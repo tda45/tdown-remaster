@@ -488,8 +488,8 @@ Per aggiungere più playlist, separale con uno spazio o una nuova riga</translat
         <translation>Media già in archivio</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>L&quot;engine &quot;%1&quot; richiede almeno la versione &quot;%2&quot; di Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>L&quot;engine &quot;%1&quot; richiede almeno la versione &quot;%2&quot; di TDown Remaster</translation>
     </message>
     <message>
         <source>Failed to download, Following path can not be created: </source>

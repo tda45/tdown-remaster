@@ -601,8 +601,8 @@ Exampe 2: ${gateway}:8080</source>
         <translation>Грешка, изпълним файл за бекенд &quot;%1&quot; не можа да бъде намерен</translation>
     </message>
     <message>
-        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of Media Downloader</source>
-        <translation>Енджин „%1“ изисква поне версия „%2“ на Media Downloader</translation>
+        <source>Engine &quot;%1&quot; requires atleast version &quot;%2&quot; of TDown Remaster</source>
+        <translation>Енджин „%1“ изисква поне версия „%2“ на TDown Remaster</translation>
     </message>
     <message>
         <source>To Disable These Checks, Do The Following:-</source>
