@@ -1,7 +1,12 @@
 title: TDown Remaster
 description: Bir Video İndirme Platformu...
 show_downloads: true
-theme: jekyll-theme-cayman
+theme: minima
+markdown: kramdown
+highlighter: rouge
 
 gems:
   - jekyll-mentions
+
+sass:
+  style: compressed
