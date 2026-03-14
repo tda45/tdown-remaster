@@ -63,8 +63,17 @@
 	</categories>
 
 	<releases>
-	<release version="1.0.0" type="stable" date="2024-03-14">
-		<url type="details">https://github.com/tda45/tdown-remaster/releases/download/v1.0.0/TDownRemaster-1.0.0.tar.xz</url>
+		<release version="5.5.0" type="stable" date="2026-03-14">
+		<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.5.0/media-downloader-5.5.0.tar.xz</url>
+			<description>
+				<p>Changelog</p>
+				<ul>
+					<li>Bundle svtplay-dl.</li>
+				</ul>
+			</description>
+		</release>
+		<release version="5.4.9" type="stable" date="2026-03-06">
+		<url type="details">https://github.com/tda45/tdown-remaster/releases/download/5.4.9/media-downloader-5.4.9.tar.xz</url>
 			<description>
 				<p>Changelog</p>
 				<ul>
